@@ -1,0 +1,15 @@
+{
+  "name": "node-js-personal",
+  "version": "1.0.0",
+  "description": "node.js 개인과제",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.2.4"
+  }
+}
