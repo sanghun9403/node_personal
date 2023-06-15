@@ -32,7 +32,7 @@ router.post("/posts", async (req, res) => {
 
 // 게시글 전체조회
 router.get("/posts", async (req, res) => {
-  const showPost = await Posts.find({});
+  const showPost = await Posts.find({}).sort({ createdAt: -1 });
 
   if (!showPost.length) {
     return res.status(404).json({ message: "게시글이 없습니다." });
