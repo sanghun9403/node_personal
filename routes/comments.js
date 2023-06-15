@@ -93,7 +93,7 @@ router.delete("/comments/:commentId", async (req, res) => {
   }
 
   const deleteReview = await Comments.findById({ _id: new ObjectId(commentId) });
-  if (!deleteReview || !password) {
+  if (!deleteReview) {
     return res.status(400).json({ message: "해당 아이디로 작성된 댓글이 없습니다." });
   } else if (deleteReview.password !== password) {
     return res.status(400).json({ message: "잘못된 비밀번호입니다." });
