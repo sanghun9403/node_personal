@@ -42,7 +42,7 @@ router.post("/comments/:postId", checkObjectId, async (req, res) => {
 // 댓글 목록 조회
 router.get("/comments/:postId", checkObjectId, async (req, res) => {
   const { postId } = req.params;
-  const showReview = await Comments.find({ postId: new ObjectId(postId) });
+  const showReview = await Comments.find({ postId: new ObjectId(postId) }).sort({ createdAt: -1 });
 
   if (!showReview.length) {
     return res.status(404).json({ message: "데이터가 없습니다." });
