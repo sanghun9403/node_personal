@@ -22,7 +22,7 @@ router.post("/posts", async (req, res) => {
   const { user, password, title, content } = req.body;
 
   if (!user || !password || !title) {
-    return res.status(400).json({ message: "데이터 형식이 올바르지 않습니다." });
+    return res.status(400).json({ message: "데이터를 입력해주세요" });
   }
 
   const createPosts = await Posts.create({ user, password, title, content });
