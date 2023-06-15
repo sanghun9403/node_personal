@@ -76,7 +76,7 @@ router.get("/posts/:postId", checkObjectId, async (req, res) => {
 //게시글 수정
 router.put("/posts/:postId", checkObjectId, async (req, res) => {
   const { postId } = req.params;
-  const { user, password, title, content, createdAt, updatedAt } = req.body;
+  const { user, password, title, content } = req.body;
 
   const modifyPost = await Posts.findById(new ObjectId(postId));
   if (!modifyPost) {
