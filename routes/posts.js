@@ -121,7 +121,7 @@ router.delete("/posts/:postId", checkObjectId, async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = { router, checkObjectId };
 // module.exports = checkObjectId;
 // exports하니까 게시글 조회할때 데이터가 없으면 게시글이 없어야 합니다
 // 가 나와야하는데 안나오는 현상 발생, exports를 하지 않으면 정상출력

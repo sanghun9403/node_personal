@@ -1,22 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-// const checkObjectId = require("./posts.js");
+const { checkObjectId } = require("./posts.js");
 const Comments = require("../schemas/comment.js");
 const Posts = require("../schemas/post.js");
 const { ObjectId } = require("mongoose").Types;
-
-const checkObjectId = (req, res, next) => {
-  const { postId } = req.params;
-  try {
-    if (!ObjectId.isValid(postId)) {
-      throw Error("데이터 형식이 올바르지 않습니다.");
-    }
-    next();
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
-  }
-};
 
 // 댓글 생성
 router.post("/comments/:postId", checkObjectId, async (req, res) => {

@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 
 const commentsRouter = require("./routes/comments.js");
-const postsRouter = require("./routes/posts.js");
+const { router: postsRouter } = require("./routes/posts.js");
 const connect = require("./schemas");
 connect();
 
