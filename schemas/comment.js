@@ -1,21 +1,26 @@
 const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  nickname: {
+    type: String,
+  },
   postId: {
     type: String,
     required: true,
   },
-  user: {
+  comment: {
     type: String,
     required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type: String,
   },
 });
+commentSchema.virtual("commentId").get(function () {
+  return this._id.toHexString();
+});
+commentSchema.set("toJSON", { virtuals: true });
+
 commentSchema.set("timestamps", true);
 module.exports = mongoose.model("Comments", commentSchema);

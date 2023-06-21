@@ -1,14 +1,20 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
+const commentsRouter = require("./routes/comments");
+const postsRouter = require("./routes/posts");
+const usersRouter = require("./routes/users");
+const authRouter = require("./routes/auth");
+const connect = require("./schemas");
+
 const app = express();
 const port = 3000;
 
-const commentsRouter = require("./routes/comments.js");
-const { router: postsRouter } = require("./routes/posts.js");
-const connect = require("./schemas");
 connect();
 
 app.use(express.json());
-app.use("/", [commentsRouter, postsRouter]);
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use("/", [commentsRouter, postsRouter, usersRouter, authRouter]);
 
 app.get("/", (req, res) => {
   res.send("sparta node.js blog");
