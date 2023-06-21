@@ -74,6 +74,7 @@ router.put(
   checkMiddelware,
   async (req, res) => {
     const { commentId } = req.params;
+    const { postId } = req.params;
     const { userId } = res.locals.user;
     const { comment } = req.body;
     const modifyReview = await Comments.findById(commentId);
@@ -85,6 +86,8 @@ router.put(
         return res.status(400).json({ message: "수정권한이 없습니다." });
       } else if (!comment) {
         return res.status(400).json({ message: "댓글 내용을 입력해주세요." });
+      } else if (modifyReview.postId != postId) {
+        return res.status(404).json({ message: "해당 게시글의 댓글이 아닙니다." });
       } else {
         await Comments.updateOne({ _id: commentId }, { $set: { comment: comment } });
         res.status(201).json({
@@ -110,6 +113,7 @@ router.delete(
   checkMiddelware,
   async (req, res) => {
     const { commentId } = req.params;
+    const { postId } = req.params;
     const { userId } = res.locals.user;
 
     try {
@@ -118,6 +122,8 @@ router.delete(
         return res.status(400).json({ message: "해당 아이디로 작성된 댓글이 없습니다." });
       } else if (deleteReview.userId != userId) {
         return res.status(400).json({ message: "삭제권한이 없습니다." });
+      } else if (deleteReview.postId != postId) {
+        return res.status(404).json({ message: "해당 게시글의 댓글이 아닙니다." });
       } else {
         await Comments.deleteOne({ _id: commentId });
         res.status(200).json({ message: "댓글 삭제 완료" });
