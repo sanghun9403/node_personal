@@ -31,7 +31,7 @@ router.post("/posts", authMiddleware, async (req, res) => {
 
     res.status(201).json({ message: "게시글 생성완료" });
   } catch (err) {
-    res.status(412).json({
+    res.status(400).json({
       message: "데이터 형식이 올바르지 않습니다",
     });
   }
