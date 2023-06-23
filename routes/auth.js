@@ -11,7 +11,7 @@ router.post("/login", async (req, res) => {
 
   try {
     if (!user || password !== user.password) {
-      res.status(400).json({
+      res.status(412).json({
         errorMessage: "이메일 또는 패스워드가 틀렸습니다.",
       });
       return;
