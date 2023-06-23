@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
 
     if (!token || tokenType !== "Bearer") {
       res.status(401).send({
-        errorMessage: "로그인 후 이용 가능한 기능입니다.",
+        message: "로그인 후 이용 가능한 기능입니다.",
       });
       return;
     }
@@ -35,8 +35,8 @@ module.exports = async (req, res, next) => {
     next();
   } catch (err) {
     res.clearCookie("authorization");
-    res.status(401).send({
-      errorMessage: "전달된 쿠키에서 오류가 발생했습니다.",
+    res.status(400).send({
+      message: "전달된 쿠키에서 오류가 발생했습니다.",
     });
   }
 };
